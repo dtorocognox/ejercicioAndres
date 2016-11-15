@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="miTienda">
+
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <style>
+    body {
+        margin-top: 20px;
+    }
+    </style>
+    <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="app2.js"></script>
+</head>
+
+<body>
+    <div class="container" ng-controller="TiendaController as tienda">
+        <div>
+            <div class="col-sm-4" ng-repeat="art in articulo">
+                <h4>
+                    {{art.nombre}}
+                    <div>
+                        <span class="label label-success">Descuento: {{art.descuento }}%</span>
+                        <span ng-class="art.stock >= 15 ? 'label label-info': (art.stock == 0 ? 'label label-danger' : 'label label-warning')">
+                             Stock: {{art.stock}}
+                        </span>
+                    </div>
+                </h4>
+                <p>
+                    <strike ng-if="art.descuento != 0">{{art.precio | currency:'€'}}</strike>
+                    <strong>{{(art.precio*(1-(art.descuento/100))) | currency:'€'}}</strong>
+                </p>
+                <img ng-src="{{art.imagen}}" class="img-responsive" />
+                <button class="btn btn-primary pull-right" ng-disabled="!art.stock">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    Añadir al carrito
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
